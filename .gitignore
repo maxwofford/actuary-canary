@@ -1,1 +1,6 @@
+# Databases
 *.sqlite3
+
+# Compiled / optimized files
+__pycache__/
+*.py[cod]
