@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 
 gem 'bcrypt'
+gem 'http'
 gem 'jbuilder'
 gem 'jquery-rails'
 gem 'pg'
