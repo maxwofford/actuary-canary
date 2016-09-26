@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root "options#index"
+
+  # Non-RESTful endpoints for triggering updates
+  get "/stocks/update", to: "stocks#update", as: :stocks_update
+  get "/options/update", to: "options#update", as: :options_update
 end
