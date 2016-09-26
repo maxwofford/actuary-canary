@@ -1,5 +1,7 @@
 # Actuary Canary
 
+[![CircleCI](https://circleci.com/gh/MaxWofford/actuary-canary.svg?style=svg)](https://circleci.com/gh/MaxWofford/actuary-canary)
+
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Table of Contents**
 
