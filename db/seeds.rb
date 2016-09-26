@@ -1,7 +1,11 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+nasdaq = NasdaqAdapter.new
+gfinance = GoogleFinanceAdapter.new
+
+# Populate stock symbols
+symbols = nasdaq.get_all_stock_symbols
+symbols.each do |symbol|
+  gid = gfinance.get_gid_by_symbol symbol
+  share_price = gfinance.get_price_by_gid gid
+
+  Stock.create(symbol: symbol, gid: gid, share_price: share_price)
+end
