@@ -77,7 +77,7 @@ class GoogleFinanceAdapter
     # Required params
     params = {
       output: :json,
-      cgid: gid # GID to query
+      cid: gid # chain ID to query
     }
 
     # Optional params
@@ -85,7 +85,7 @@ class GoogleFinanceAdapter
     params[:expm] = expiration_month if expiration_month
     params[:expy] = expiration_year if expiration_year
 
-    uri = "#{BASE_URI}/option_option?#{params.to_query}"
+    uri = "#{BASE_URI}/option_chain?#{params.to_query}"
     resp = Http.get(uri)
     resp_status = resp.status.to_i
     return nil unless resp_status == 200
