@@ -14,11 +14,14 @@ class GoogleFinanceAdapter
   def get_puts_by_gid gid
     # Read all put options by expiration date
     put_options = []
+    byebug
     get_expiration_dates(gid).each{ |date|
       new_put_options = get_option_by_gid(gid, date[:d], date[:m], date[:y])[:puts]
-      raise "Received a non-200 response from Google" if new_put_options == nil
+      byebug
+      raise "Received a non-200 response from Google" if new_put_options.is_nil?
       put_options.concat(new_put_options)
     }
+    Rails.logger.logger.error
     put_options
   rescue
     Rails.logger.error { "Encountered an error when trying to get_puts_by_gid"\
@@ -64,9 +67,13 @@ class GoogleFinanceAdapter
 
   def get_expiration_dates gid
     # Google Finance's API returns a list of expiration dates when requesting a
-    # non-valgid expiration date (I'm using 0/0/0)
-    option = get_option_by_gid(gid, 0, 0, 0)[:expirations]
-    return option if option
+    # non-valid expiration date (I'm using 0/0/0)
+    expiration_dates = get_options_by_gid(gid, 0, 0, 0)[:expirations]
+    raise "Recieved a non-200 response from Google" if expiration_dates.is_nil?
+    expiration_dates
+  rescue
+    Rails.logger.error { "Encountered an error when trying to"\
+                         " get_expiration_dates of gid '#{gid}'"}
   end
 
   def get_option_by_gid(gid,

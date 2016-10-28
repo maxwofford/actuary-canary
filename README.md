@@ -11,6 +11,32 @@
 
 <!-- markdown-toc end -->
 
+## Architecture
+
+The server is made to run on Heroku's free hobby tier. To do this, it runs as multiple instances in new heroku projects. Here's the default configuration:
+
+### Database
+
+The database instance scrapes data from NASDAQ and Google Finances' API once per day. It keeps track of the following:
+
+- All stocks
+  - Symbol (the ticker symbol)
+  - HasOptions (true if Google Finance API lists puts)
+  - Id (cid on Google Finance API for quick updating)
+- The top 1000 most profitable (annual return) puts
+
+### User interface
+
+The UI instance scrapes data from Google Finance and the database instance every 10 minutes. It handles the following:
+
+- Views
+  - '/' view of the 1000 most profitable puts
+  - '/favorites' view of all puts from favored symbols
+  - '/signin' '/signout' user auth pages
+- Users
+  - Favorite stock symbols
+- All puts (of stock symbols that have been favored by a user)
+
 ## First-time Setup
 
 ```bash

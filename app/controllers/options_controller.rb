@@ -5,8 +5,7 @@ class OptionsController < ApplicationController
 
   def update
     symbol = params[:symbol]
-    gid = params[:symbol]
-    gid = Stock.find_by(symbol: symbol).gid if symbol and !gid
+    gid = params[:gid] or Stock.find_by(symbol: symbol).gid
 
     start_time = Time.now
 
@@ -30,6 +29,7 @@ class OptionsController < ApplicationController
   private
 
   def update_option_by_gid gid
+    gfinance = GoogleFinanceAdapter.new
     options = gfinance.get_puts_by_gid gid
     options.each do |option|
       # Google denotes puts that aren't on the market with a volume of '-'
@@ -63,7 +63,7 @@ class OptionsController < ApplicationController
     Option.delete_all
 
     Stock.all.each{ |stock|
-      update_option_by_stock stock.symbol
+      update_option_by_gid stock.gid
     }
   end
 end
