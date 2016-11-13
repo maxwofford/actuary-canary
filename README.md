@@ -21,7 +21,7 @@ $ git clone https://github.com/MaxWofford/actuary-canary && cd actuary-canary
 $ docker-compose build
 
 # Generate a secret key for development
-$ touch .env && docker-compose run web echo "SECRET_KEY_BASE=$(rails secret)" >> .env
+$ touch .env && echo "SECRET_KEY_BASE=$(docker-compose run web rails secret)" >> .env
 
 # Create the db
 $ docker-compose run web rails db:create db:migrate
