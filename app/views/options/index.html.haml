@@ -1,0 +1,28 @@
+%p#notice= notice
+%h1 Options
+%table
+  %thead
+    %tr
+      %th Symbol
+      %th Price
+      %th Expiration
+      %th Ask
+      %th Bid
+      %th Annualized return
+      %th Return
+      %th Strike
+      %th Volume
+      %th{:colspan => "3"}
+  %tbody
+    - @options.each do |opt|
+      %tr
+        %td= opt.stock.symbol
+        %td= number_to_currency(opt.stock.price)
+        %td= opt.expiration
+        %td= number_to_currency(opt.ask)
+        %td= number_to_currency(opt.bid)
+        %td= number_to_currency(opt.annualized_return)
+        %td= number_to_currency(opt.return)
+        %td= number_to_currency(opt.strike)
+        %td= opt.volume
+%br/
