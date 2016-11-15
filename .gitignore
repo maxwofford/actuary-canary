@@ -35,3 +35,6 @@ bower.json
 
 # Ignore precompiled assets
 /public/assets/
+
+# Ignore rais-erd generated diagram
+erd.pdf
