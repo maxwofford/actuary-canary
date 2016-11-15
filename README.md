@@ -33,3 +33,11 @@ $ docker-compose run web rails db:create db:migrate
 # Launch the server
 $ docker-compose up
 ```
+
+## Misc
+
+Generate a model diagram with:
+
+```bash
+$ docker-compose run web erd
+```
