@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root 'pages#home', as: :pages_home
 
   get '/options', to: 'options#index'
