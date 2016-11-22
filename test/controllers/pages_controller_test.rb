@@ -5,4 +5,9 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     get pages_home_url
     assert_response :success
   end
+
+  test 'should get title on home page' do
+    get pages_home_url
+    assert_select 'title', 'Actuary Canary'
+  end
 end
