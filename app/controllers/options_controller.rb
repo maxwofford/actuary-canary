@@ -1,6 +1,7 @@
 class OptionsController < ApplicationController
   def index
-    @options = Option.order("annualized_return DESC")
+    @options = Option.order("annualized_return DESC").take(10)
+    flash[:notice] = "No options in database!" unless @options.any?
   end
 
   def update
