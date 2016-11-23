@@ -28,9 +28,29 @@ class OptionsController < ApplicationController
     render status: 200, json: response
   end
 
+  def create
+    symbol = params[:symbol]
+    gid = params[:gid]
+
+    start_time = Time.now
+
+    gfinance = GoogleFinanceAdapter.new
+    gid ||= gfinance.get_gid_by_symbol(symbol) if symbol
+    Stock.create!(symbol: symbol, gid: gid)
+
+    crawl_time = ((Time.now - start_time) * 1000).to_i
+
+    response = {
+      crawl_time: crawl_time
+    }.to_json
+
+    render status: 200, json: response
+  end
+
   private
 
   def update_option_by_gid gid
+    gfinance = GoogleFinanceAdapter.new
     options = gfinance.get_puts_by_gid gid
     options.each do |option|
       # Google denotes puts that aren't on the market with a volume of '-'
