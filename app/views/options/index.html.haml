@@ -18,7 +18,11 @@
       - @options.each do |opt|
         %tr
           %td= opt.stock.symbol
-          %td= number_to_currency(opt.stock.price)
+          %td
+            - if opt.stock.share_price.nil?
+              N/A
+            - else
+              = number_to_currency(opt.stock.share_price)
           %td= opt.expiration
           %td= number_to_currency(opt.ask)
           %td= number_to_currency(opt.bid)
