@@ -6,8 +6,8 @@ class OptionsController < ApplicationController
 
   def update
     symbol = params[:symbol]
-    gid = params[:symbol]
-    gid = Stock.find_by(symbol: symbol).gid if symbol and !gid
+    gid = params[:gid]
+    gid ||= Stock.find_by(symbol: symbol).gid if symbol
 
     start_time = Time.now
 
