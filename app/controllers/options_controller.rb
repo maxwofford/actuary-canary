@@ -49,7 +49,7 @@ class OptionsController < ApplicationController
 
   private
 
-  def update_option_by_stock symbol
+  def update_option_by_stock(symbol)
     gfinance = GoogleFinanceAdapter.new
     gid = gfinance.get_gid_by_symbol symbol
     update_option_by_gid gid
